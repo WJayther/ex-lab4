@@ -12,8 +12,18 @@ import random
 
 def field(items, *args):
     assert len(args) > 0
-    # Необходимо реализовать генератор 
-
+    # Необходимо реализовать генератор
+    for item in items:
+        if len(args) == 1:
+            if args[0] not in item:
+                pass
+            else:
+                yield item[args[0]]
+        else:
+            if len(set(args) & set(item))==0:
+                pass
+            else:
+                yield {arg: item[arg] for arg in args if arg in item}
 
 # Генератор списка случайных чисел
 # Пример:
@@ -22,3 +32,5 @@ def field(items, *args):
 def gen_random(begin, end, num_count):
     pass
     # Необходимо реализовать генератор
+    for i in range(num_count):
+        yield random.randint(begin,end)
