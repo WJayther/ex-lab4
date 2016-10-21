@@ -8,10 +8,21 @@ class Unique(object):
         #           ignore_case = False, Aбв и АБВ одинаковые строки, одна из них удалится
         # По-умолчанию ignore_case = False
         pass
+        self.ignore_case = kwargs.get('ignore_case',False)
+        self.uniq_items = list()
+        self.items = iter(items)
+        self.index = 0
 
     def __next__(self):
         # Нужно реализовать __next__    
         pass
+        while self.items:
+            value = next(self.items) #will Raise StopIteration
+            if self.ignore_case and type(value) == type(str):
+                value = str(value).lower()
+            if value not in self.uniq_items:
+                self.uniq_items.append(value)
+                return value
 
     def __iter__(self):
         return self
