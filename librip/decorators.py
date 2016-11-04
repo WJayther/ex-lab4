@@ -35,3 +35,17 @@
 # test_4
 # 1
 # 2
+def print_result(f):
+    def decor(*args, **kwargs):
+        inresult = f(*args, **kwargs)
+        print(f.__name__)
+        if type(inresult) == dict:
+            for key in sorted(inresult):
+                print(key+' = '+str(inresult[key]))
+        elif type(inresult) == list:
+            for item in inresult:
+                print(item)
+        else:
+            print(inresult)
+        return inresult
+    return decor
